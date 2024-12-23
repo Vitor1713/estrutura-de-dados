@@ -81,8 +81,14 @@ void populateStack(Stack *stack) {
   }
 }
 
+void clearStack(Stack *stack) {
+  free(stack->values);
+  free(stack);
+}
+
 int main () {
   Stack *stack = createStack();
   populateStack(stack);
   printStack(stack);
+  clearStack(stack);
 }
