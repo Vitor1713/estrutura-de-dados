@@ -26,22 +26,12 @@ int length(Stack *stack) {
 void push(Stack *stack, int value) {
   stack->length++;
   if(stack->length == 1) {
-    stack->values = malloc(stack->length * sizeof(int));
+    stack->values = malloc(sizeof(int));
   }else {
     stack->values = realloc(stack->values, stack->length * sizeof(int));
   }
   stack->values[stack->length - 1] = value;
   stack->top = &stack->values[stack->length - 1];
-} 
-
-int pop(Stack *stack) {
-  int pop;
-
-  return pop;
-}
-
-int *peek(Stack *stack) {
-  return stack->top;
 }
 
 int isEmpty(Stack *stack) {
@@ -50,8 +40,34 @@ int isEmpty(Stack *stack) {
   }
   return 0;
 }
+
+int pop(Stack *stack) {
+  if(isEmpty(stack)) {
+    printf("Pilha Vazia!");
+    return -1;
+  }
+
+  int pop = stack->values[stack->length - 1];
+  
+  stack->length--;
+
+  if ((stack->length) == 0) {
+    stack->values = malloc(sizeof(int));
+  } else {
+    stack->values = realloc(stack->values, stack->length * sizeof(int));
+  }
+
+  stack->top = &stack->values[stack->length -1];
+  
+  return pop;
+}
+
+int *peek(Stack *stack) {
+  return stack->top;
+}
  
 void printStack(Stack *stack) {
+  printf("\n");
   if(!isEmpty(stack)) {
     for(int i = stack->length - 1; i >= 0; i--) {
       printf("%i", stack->values[i]);
@@ -89,6 +105,8 @@ void clearStack(Stack *stack) {
 int main () {
   Stack *stack = createStack();
   populateStack(stack);
+  printStack(stack);
+  pop(stack);
   printStack(stack);
   clearStack(stack);
 }
