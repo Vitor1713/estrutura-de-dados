@@ -84,15 +84,15 @@ void printStack(Stack *stack) {
 }
 
 void populateStack(Stack *stack) {
-  int length, min, max = 0;
+  int size, min, max = 0;
   srand(time(NULL));
   printf("Digite o tamanho da pilha: \n");
-  scanf("%i", &length);
+  scanf("%i", &size);
   printf("Digite um valor minimo: \n");
   scanf("%i", &min);
   printf("Digite um valor maximo: \n");
   scanf("%i", &max);
-  for(int i = 0; i < length; i++) {
+  for(int i = 0; i < size; i++) {
     push(stack, rand() % max + min);
   }
 }
