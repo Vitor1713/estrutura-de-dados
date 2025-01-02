@@ -88,6 +88,11 @@ void populateQueue(Queue *queue) {
   }
 }
 
+void clearQueue(Queue *queue) {
+  free(queue->values);
+  free(queue);
+}
+
 int main() {
   Queue *queue = createQueue();
   populateQueue(queue);
@@ -96,4 +101,5 @@ int main() {
   dequeue(queue);
   dequeue(queue);
   printQueue(queue);
+  clearQueue(queue);
 }
