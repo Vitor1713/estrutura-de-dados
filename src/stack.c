@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifndef _STACK_
+#define _STACK_
+
 typedef struct Stack Stack;
 
 struct Stack {
@@ -19,7 +22,7 @@ Stack* createStack() {
   return stack;
 }
 
-int length(Stack *stack) {
+int lengthStack(Stack *stack) {
   return stack->length;
 }
 
@@ -34,7 +37,7 @@ void push(Stack *stack, int value) {
   stack->top = &stack->values[stack->length - 1];
 }
 
-int isEmpty(Stack *stack) {
+int isEmptyStack(Stack *stack) {
   if(stack->length == 0) {
     return 1;
   }
@@ -42,7 +45,7 @@ int isEmpty(Stack *stack) {
 }
 
 int pop(Stack *stack) {
-  if(isEmpty(stack)) {
+  if(isEmptyStack(stack)) {
     printf("Pilha Vazia!");
     return -1;
   }
@@ -68,7 +71,7 @@ int *peek(Stack *stack) {
  
 void printStack(Stack *stack) {
   printf("\n");
-  if(!isEmpty(stack)) {
+  if(!isEmptyStack(stack)) {
     for(int i = stack->length - 1; i >= 0; i--) {
       printf("%i", stack->values[i]);
       if(i == 0) {
@@ -77,7 +80,7 @@ void printStack(Stack *stack) {
       printf(" - ");
     }
     printf("\nElemento do topo: %i", *peek(stack));
-    printf("\nNumero de elementos: %i", length(stack));
+    printf("\nNumero de elementos: %i", lengthStack(stack));
   }else {
     printf("Pilha vazia! \n"); 
   }
@@ -102,11 +105,4 @@ void clearStack(Stack *stack) {
   free(stack);
 }
 
-int main () {
-  Stack *stack = createStack();
-  populateStack(stack);
-  printStack(stack);
-  pop(stack);
-  printStack(stack);
-  clearStack(stack);
-}
+#endif

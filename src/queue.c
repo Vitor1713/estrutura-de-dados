@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifndef _QUEUE_
+#define _QUEUE_
+
 typedef struct Queue Queue;
 
 struct Queue {
@@ -20,7 +23,7 @@ Queue *createQueue() {
   return queue;
 }
 
-int isEmpty(Queue *queue) {
+int isEmptyQueue(Queue *queue) {
   if (queue->length == 0) {
     return 1;
   }
@@ -28,7 +31,7 @@ int isEmpty(Queue *queue) {
   return 0;
 }
 
-int length(Queue *queue) { return queue->length; }
+int lengthQueue(Queue *queue) { return queue->length; }
 
 void enqueue(Queue *queue, int value) {
   queue->length++;
@@ -43,7 +46,7 @@ void enqueue(Queue *queue, int value) {
 }
 
 int dequeue(Queue *queue) {
-  if(isEmpty(queue)) return -1;
+  if(isEmptyQueue(queue)) return -1;
 
   int element = queue->values[0];
   queue->length--;
@@ -59,14 +62,14 @@ int dequeue(Queue *queue) {
 
 void printQueue(Queue *queue) {
   printf("\n");
-  if(!isEmpty(queue)) {
+  if(!isEmptyQueue(queue)) {
     for(int i = 0; i < queue->length; i++) {
       printf("%i", queue->values[i]);
       if(queue->length == (i + 1)) break;
       printf(" - ");
     }
     printf("\nElemento da frente: %i", *queue->first);
-    printf("\nNumero de elementos: %i", queue->length);
+    printf("\nNumero de elementos: %i", lengthQueue(queue));
   }else {
     printf("Fila vazia!");
   }
@@ -93,13 +96,4 @@ void clearQueue(Queue *queue) {
   free(queue);
 }
 
-int main() {
-  Queue *queue = createQueue();
-  populateQueue(queue);
-  printQueue(queue);
-  dequeue(queue);
-  dequeue(queue);
-  dequeue(queue);
-  printQueue(queue);
-  clearQueue(queue);
-}
+#endif
