@@ -5,9 +5,11 @@ files.a: files.o
 	ar -rc ./lib/libstack.a ./bin/stack.o
 	ranlib ./lib/libqueue.a
 	ranlib ./lib/libstack.a
-files.o: ./src/queue.c ./src/stack.c
+files.o: libraryDir ./src/queue.c ./src/stack.c
 	gcc -c ./src/queue.c -o bin/queue.o
 	gcc -c ./src/stack.c -o bin/stack.o
+libraryDir: 
+	mkdir bin lib
 run:
 	./bin/main
 clean: 
